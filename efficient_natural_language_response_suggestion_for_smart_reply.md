@@ -9,7 +9,7 @@ class DotProductScoringModel(nn.Module):
     def __init__(self, input_size_q, input_size_a):
         super(DotProductScoringModel, self).__init__()
         
-        self.embedding_dim = 300
+        self.embedding_dim = 320
         
         self.question_embedding = nn.Embedding(input_size_q, self.embedding_dim)
         self.question_embedding.weight.data[0] = 0
@@ -29,9 +29,9 @@ class DotProductScoringModel(nn.Module):
     def embedd_questions(self, questions):
         questions = self.question_embedding(questions).sum(dim=1).squeeze()
         
-        q = F.tanh(self.fc1_q(questions) / 10)
-        q = F.tanh(self.fc2_q(q) / 10) + q
-        q = F.tanh(self.fc3_q(q) / 10)
+        q = F.tanh(self.fc1_q(questions))
+        q = F.tanh(self.fc2_q(q))
+        q = F.tanh(self.fc3_q(q))
         
         return q
     
@@ -39,9 +39,9 @@ class DotProductScoringModel(nn.Module):
     def embedd_answers(self, answers):
         answers = self.answer_embedding(answers).sum(dim=1).squeeze()
     
-        a = F.tanh(self.fc1_a(answers) / 10)
-        a = F.tanh(self.fc2_a(a) / 10) + a
-        a = F.tanh(self.fc3_a(a) / 10)
+        a = F.tanh(self.fc1_a(answers))
+        a = F.tanh(self.fc2_a(a))
+        a = F.tanh(self.fc3_a(a))
 
         return a
     
@@ -50,7 +50,7 @@ class DotProductScoringModel(nn.Module):
         q = self.embedd_questions(questions)
         a = self.embedd_answers(answers)
                 
-        return (q * a).sum(dim=1) / 100
+        return (q * a).sum(dim=1)
 ```
 
 ### Multiple Negatives Loss
