@@ -2,7 +2,7 @@
 
 [//]: # (Image References)
 
-[image1]: ./img/ebay_vis_srch_arch
+[image1]: ./img/ebay_vis_srch_arch.png
 
 Source: [arxiv](https://arxiv.org/abs/1706.03154)
 
