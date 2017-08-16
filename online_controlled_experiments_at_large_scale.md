@@ -6,7 +6,7 @@ The problem that the Bing Experimentation System addresses is how to guide produ
 
 ### Tenets
 
-__Tenet 1:__ The Organization wants to make data-driven decisions and has formalized the Overall Evaluation Criterion (OEC)
+__Tenet 1:__ The Organization wants to make data-driven decisions and has formalized the Overall Evaluation Criterion
 
 __Tenet 2:__ Controlled experiments can be run and their results are trustworthy
 
