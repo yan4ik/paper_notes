@@ -13,5 +13,7 @@ Challenges:
  * Scale
  * Data Quality
  * Quality of Query Image
+ 
+### Approach
 
 ![alt text][image1]
