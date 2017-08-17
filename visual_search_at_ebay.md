@@ -9,7 +9,7 @@ Source: [arxiv](https://arxiv.org/abs/1706.03154)
 
 In this paper, we propose a novel end-to-end approach for scalable visual search infrastructure.
 
-Challenges:
+__Challenges:__
  * Volatile Inventory
  * Scale
  * Data Quality
