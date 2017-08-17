@@ -3,7 +3,7 @@
 [//]: # (Image References)
 
 [image1]: ./img/ebay_vis_srch_arch.png
-[image1]: ./img/ebay_vis_srch_fc.png
+[image2]: ./img/ebay_vis_srch_fc.png
 
 Source: [arxiv](https://arxiv.org/abs/1706.03154)
 
@@ -33,6 +33,11 @@ We append an additional fully-connected layer to the last shared layer, and use 
 
 This bottom stream of split topology in network is trained independently from the top stream, but by fixing the shared layers and learning weights for the later layers with the same classification loss that we use for category recognition.
 
+We use 4096 bits in our binary semantic hash.
+
 ![alt text][image2]
 
+<p align="center">
 We use a single DNN to predict category as well as to extract binary semantic hash.
+</p>
+
