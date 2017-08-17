@@ -2,11 +2,16 @@
 
 Source: [paper](http://www.kdd.org/kdd2016/papers/files/adf0975-shanA.pdf)
 
+[//]: # (Image References)
+
+[image1]: ./img/deep_crossing_arch.png
+[image2]: ./img/deep_crossing_res_unit.png
+
 This paper proposes the `Deep Crossing` model which is a deep neural network that automatically combines features to produce superior models.
 
 ## Model Architecture
 
-TODO: image here
+![alt text][image1]
 
 The model has four types of layers including
  * the Embedding Layer
@@ -26,7 +31,7 @@ For the click prediction experiments embedding dimensionality is set to 256. Fea
 
 The residual layers are constructed from the Residual Unit. The unique property of Residual Unit is to add back the original input feature ter passing it through two layers of ReLU transformations.
 
-TODO: image here
+![alt text][image2]
 
 ### Early Crossing vs. Late Crossing
 
