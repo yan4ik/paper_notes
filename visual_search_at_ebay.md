@@ -62,4 +62,4 @@ After calculating the aspect matching score, we blend it with the visual apperan
 
 ![alt text][image3]
 
-Linear combination allows fast computation without performance degradation. The combination weight is fixed (0.75) in out current solution, but is also configurable dynamically to adapt to changes ober time.
+Linear combination allows fast computation without performance degradation. The combination weight is fixed (0.75) in our current solution, but is also configurable dynamically to adapt to changes over time.
