@@ -4,6 +4,7 @@
 
 [image1]: ./img/ebay_vis_srch_arch.png
 [image2]: ./img/ebay_vis_srch_fc.png
+[image3]: ./img/ebay_vis_srch_score.png
 
 Source: [arxiv](https://arxiv.org/abs/1706.03154)
 
@@ -41,3 +42,24 @@ We use 4096 bits in our binary semantic hash.
 We use a single DNN to predict category as well as to extract binary semantic hash.
 </p>
 
+### Aspect Prediction
+
+Aspects: color, brand, style, etc.
+
+Our aspect classifiers are built on top of the shared category recognition network. Specifically, in order to save computation time and storage all aspect models share the parameters with the main DNN model, up to the final pool layer. Next, we create a separate branch for each aspect type.
+
+Some aspects are specific to certain categories. Therefore we embed the image representation from pool5 layer with one-hot encoded vector representation of leaf category.
+
+We use XGBoost to train the aspect models.
+
+### Aspect-based Image Re-ranking
+
+Suppose our model generates n aspects for a query image q. Each matched item in the inventory has a set of m aspects and values as poppulated by the seller during listing. We check whether the predicted aspects match such ground-truth aspects and assign a "reward point" w<sub>i</sub> to each predicted aspect that has an exact match. The final score S<sub>aspect</sub> is obtained by accumulating all scores of matched aspects.
+
+For simplicity, we assigned hard-coded reward points for all aspects, although they can be learned from data. In our system, we assign larger points to the aspects size, brand and price while equal importance for all other aspects.
+
+After calculating the aspect matching score, we blend it with the visual apperance score S<sub>appereance</sub> (normalized Hamming distance) from image ranking to obtain the final visual search score.
+
+![alt text][image3]
+
+Linear combination allows fast computation without performance degradation. The combination weight is fixed (0.75) in out current solution, but is also configurable dynamically to adapt to changes ober time.
