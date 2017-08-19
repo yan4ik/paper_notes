@@ -18,9 +18,7 @@ __Challenges:__
  
 ## Approach
 
-<p align="center">
 ![alt text][image1]
-</p>
 
 ### Category Recognition
 
@@ -38,9 +36,9 @@ This bottom stream of split topology in network is trained independently from th
 
 We use 4096 bits in our binary semantic hash.
 
-<p align="center">
 ![alt text][image2]
 
+<p align="center">
 We use a single DNN to predict category as well as to extract binary semantic hash.
 </p>
 
@@ -62,8 +60,6 @@ For simplicity, we assigned hard-coded reward points for all aspects, although t
 
 After calculating the aspect matching score, we blend it with the visual apperance score S<sub>appereance</sub> (normalized Hamming distance) from image ranking to obtain the final visual search score.
 
-<p align="center">
 ![alt text][image3]
-</p>
 
 Linear combination allows fast computation without performance degradation. The combination weight is fixed (0.75) in out current solution, but is also configurable dynamically to adapt to changes ober time.
