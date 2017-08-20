@@ -33,3 +33,23 @@ One reason for using other methods in these cases is to gain qualitative feedbac
 Platform changes, code refactoring and bug fixes should also be tested with controlled experiments: run the new component in an A/B test and see that you get no significant differences (or even better, some improvements).
 
 For a large organization, there are many small fixes that go in every day, and it would be unreasonable to run contolled experiments for each one. We recommend that small fixes get bundled into packages so that if one is egregiously bad, the package will test negatively and it will be identified.
+
+### Negative Experiments
+
+Over time, we achieved agreement that knowingly hurting users in short-term (e.g. a 2-week experiment) can let us understand fundamental issues and thereby improve the experience long-term. Hippocrates' "Do no harm" should really be "Do no long-term harm."
+
+### Beware of Twyman's Law and Stories in the Wild
+
+Twyman wrote that "Any figure that looks interesting or different is usually wrong." Most amazing results turn out to be false when reviewed carefully, so they need to be replicated with high statisticak power and deeply analyzed before we believe them.
+
+### Innovation vs. Incrementalism
+
+As with any funnel of ideas, one must evaluate the total benefit of several small incremental bets vs. some big bold risky bets. 
+
+The question of "fail fast" vs. "persevere" always comes up. There is no magic bullet here: it is about running some experiments to get a sense of the "terrain" and being open to both options.
+
+### Multivariate Tests
+
+In the online world, agility and continuous availability of users makes MVT's less appealing.
+
+In our experience, interactions are relatively rare and more often represent bugs than true statistical interactions. Hen we do suspect interactions, or when they are detected, we run small MVT's, but these are relatively rare.
