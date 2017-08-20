@@ -36,3 +36,9 @@ The residual layers are constructed from the Residual Unit. The unique property 
 ### Early Crossing vs. Late Crossing
 
 It is worthwhile to compare Deep Crossing with DSSM. DSSM has the distinct property of delaying the feature interaction (or crossing) to the late stage of the forward computation. Before reaching the Cosing Distance node, the input features are fully embedded through multiple layers of transformations on two separate routes. In contrast, Deep Crossing adopts at most one layer of single-feature embedding, and starts feature interaction at a much earlier stage of the forward computation.
+
+## Implementation
+
+Deep Crossing is implemented on a multi-GPU platform powered by CNTK.
+
+To speed up the experiments, we have exploited the blockwise model-update filtering distributed training algorithm implemented in CNTK.
