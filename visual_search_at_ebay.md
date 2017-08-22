@@ -5,6 +5,7 @@
 [image1]: ./img/ebay_vis_srch_arch.png
 [image2]: ./img/ebay_vis_srch_fc.png
 [image3]: ./img/ebay_vis_srch_sore.png
+[image4]: ./img/ebay_vis_srch_index.png
 
 Source: [arxiv](https://arxiv.org/abs/1706.03154)
 
@@ -63,3 +64,21 @@ After calculating the aspect matching score, we blend it with the visual apperan
 ![alt text][image3]
 
 Linear combination allows fast computation without performance degradation. The combination weight is fixed (0.75) in our current solution, but is also configurable dynamically to adapt to changes over time.
+
+## System Architecture
+
+### Image Ingestion and Indexing
+
+Our ingestion pipeline detects image updates in near-real-time and maintains them in cloud storage.
+
+To reduce storage requirements, duplicate images (about third) across listings are detected and cross-linked. To detect duplicates, we compare MD5 hasehs over image bits.
+
+As images from new listings arrive, we compute image hashes for the main listing image in micro-batches against the batch hash extraction service, which is a cluster of GPU servers running out pre-trained DNN models. Image hashes are stored in a distributed database (we use Google Bigtable), keyed by the image identifier.
+
+![alt text][image4]
+
+For indexing, we generate daily image hash extracts from BigTable for all available listings in the supported categories. The batch extraction process runs as a parallel Spark job in cloud Dataproc using HBase Bigtable API. The extraction process is driven by scanning a table with currently available listing identifiers along with their category IDs, and filtering listings in the supported categories. Filtered identifiers are then used to query listings from catalog tables table in micro-batches. For each returned listing, we extract the image identifier, and then lookup corresponding image hashes in micro-batches.
+
+The image hashes preceded by listing identifier are appended to a binary file. Both listing identifier and image hash are written with fixed length (8 bytes for listing identifier and 512 bytes for image hash). We write a separate file for each category for each job partition, and store these intermediate extracts in cloud storage. After all job partitions are complete, we download intermediate extracts for each category and concatenate them across all job partitions. Concatenated extracts are uploaded back to the cloud storage.
+
+We update our DNN models frequently. To handle frequent updates, we have a separate parallel job that scans all active listings in batches, and recomputes image hashes from stored images. We keep up to 2 image hashes in Bigtable for each image corresponding to the older and newer DNN model versions, so the older image hash version can be still used in extracts while hash re-computation is running.
