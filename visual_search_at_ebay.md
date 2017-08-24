@@ -6,6 +6,7 @@
 [image2]: ./img/ebay_vis_srch_fc.png
 [image3]: ./img/ebay_vis_srch_sore.png
 [image4]: ./img/ebay_vis_srch_index.png
+[image5]: ./img/ebay_vis_srch_serv.png
 
 Source: [arxiv](https://arxiv.org/abs/1706.03154)
 
@@ -77,8 +78,22 @@ As images from new listings arrive, we compute image hashes for the main listing
 
 ![alt text][image4]
 
-For indexing, we generate daily image hash extracts from BigTable for all available listings in the supported categories. The batch extraction process runs as a parallel Spark job in cloud Dataproc using HBase Bigtable API. The extraction process is driven by scanning a table with currently available listing identifiers along with their category IDs, and filtering listings in the supported categories. Filtered identifiers are then used to query listings from catalog tables table in micro-batches. For each returned listing, we extract the image identifier, and then lookup corresponding image hashes in micro-batches.
+For indexing, we generate daily image hash extracts from BigTable for all available listings in the supported categories. The batch extraction process runs as a parallel Spark job in cloud Dataproc using HBase Bigtable API. The extraction process is driven by scanning a table with currently available listing identifiers along with their category IDs, and filtering listings in the supported categories. Filtered identifiers are then used to query listings from catalog table in micro-batches. For each returned listing, we extract the image identifier, and then lookup corresponding image hashes in micro-batches.
 
 The image hashes preceded by listing identifier are appended to a binary file. Both listing identifier and image hash are written with fixed length (8 bytes for listing identifier and 512 bytes for image hash). We write a separate file for each category for each job partition, and store these intermediate extracts in cloud storage. After all job partitions are complete, we download intermediate extracts for each category and concatenate them across all job partitions. Concatenated extracts are uploaded back to the cloud storage.
 
 We update our DNN models frequently. To handle frequent updates, we have a separate parallel job that scans all active listings in batches, and recomputes image hashes from stored images. We keep up to 2 image hashes in Bigtable for each image corresponding to the older and newer DNN model versions, so the older image hash version can be still used in extracts while hash re-computation is running.
+
+### Image Ranking
+
+To build a robust and scalable solution for finding similar items across all items in the supported categories, we create an image ranking service and deploy it in a Kubernetes cluster. Given the huge amount of data, we have to split image hashes for all the images across the cluster containing multiple nodes, rather then storing them on a single machine. 
+
+As our goal is to provide close-to-linear scalability, each node in the cluster should have knowledge about other nodes in order to decide which part of the data to serve. We use Hazelcast for cluster awareness. When a node participates in the Hazelcast cluster, it receives notifications if other nodes are leaving or joining the cluster. Once the application starts, a "cluster change" event is received by every node. Then, each node checks current set of nodes.  If there is a change, the data redistribution procedure is kicked off.
+
+In this procedure, we split the data for each category into as many partitions as the number of nodes in the cluster. Each partition is assigned to a node in round robin fashion using a list of nodes sorted according to the ID assigned by Hazelcast. Starting node is determined by Ketama consistent hash from node ID. Thus, each node can generate the same distribution of data across the cluster and identify the par it is responsible for. To guarantee that all nodes have the same data, we leverage Kubernetes to share single disk, in read-only mode, across multiple pods.
+
+For initial discovery, during cluster startup, we leverage Kubernetes service with type "Cluster IP". When node performs DNS resolution of the service, it receives information about all nodes already in the Hazelcast cluster. Each node also periodically pulls information about other nodes from the DNS record to prevent cluster separation.
+
+When our core vision service sends incoming search requests to the image ranking service, the requests could be served by any node in the cluster, referred to as "serving node". Since each node is aware of the state of the cluster, it proxies incoming requests to all other nodes including itself. Each node further looks through partitions assigned to it and finds the closest N listings for a given image hash if it has categories mentioned in the request. We use Hamming distance as the distance metric to discover the most similar listings. Each node divides category partition into a set of sub-partitions of the same number of available CPU cores and executes search in parallel to find the nearest N items. Once the search is done in each sub-partition for each leaf category in the request, results are merged and the closest overall N listings are returned. When search is completed on all data nodes, serving node performs similar merging procedure and sends back the result.
+
+![alt text][image5]
