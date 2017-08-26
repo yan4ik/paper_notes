@@ -4,7 +4,7 @@ Source: [exp-platform](http://exp-platform.com/large-scale/)
 
 [//]: # (Image References)
 
-[image1]: ./img/exp_scale_arch.png
+[image1]: ./img/exp_large_scale_arch.png
 
 The problem that the Bing Experimentation System addresses is how to guide product development and allow the organization to assess the ROI of projects, leading to a healthy focus on key ideas that move metrics of interest.
 
