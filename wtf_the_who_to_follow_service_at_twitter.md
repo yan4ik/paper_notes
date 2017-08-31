@@ -25,3 +25,13 @@ Although MapReduce excels at processing large amounts of data, iterative graph a
  * The result is serialized to HDFS, along with the graph structure, at each iteration. This provides excellent fault tollerance, but at the cost of performance.
  
 Finally, the WTF project required an online serving component for which Hadoop does not provide a solution. Although user recommendations, for the most part, can be computed as offline batch jobs, we still needed a robust, low-latency mechanism to serve results to users.
+
+### How Much Memory?
+
+We made a design decision to assume in-memory processing on a `single-machine`. The decision was driven by two rationales:
+ * the alternative (a partitioned, distributed graph processing engine) is significantly more complex and difficult to build
+ * the graph could fit into main memory of one machine.
+ 
+Our analysis does not account for metadata that we might wish to store for each edge, such as an edge weight. We recognized this weakness in the design, and that it could limit the sophistication of the algorithms we could use, but ultimately decided the risk was acceptable.
+ 
+## Overall Architecture
