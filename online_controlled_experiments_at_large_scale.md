@@ -20,7 +20,7 @@ __Tenet 3:__ We are poor at assessing the value of ideas.
 
 ### Why Controlled Experiments?
 
-Why not measure the metric of interest, ship the feature, and then llok at the delta? Our experience is that external variations overwhelm the effects we are trying to detect. 
+Why not measure the metric of interest, ship the feature, and then look at the delta? Our experience is that external variations overwhelm the effects we are trying to detect. 
 
 <p align="center">
 "Any claim coming from an observational study is most likely to be wrong."
@@ -44,7 +44,7 @@ Over time, we achieved agreement that knowingly hurting users in short-term (e.g
 
 ### Beware of Twyman's Law and Stories in the Wild
 
-Twyman wrote that "Any figure that looks interesting or different is usually wrong." Most amazing results turn out to be false when reviewed carefully, so they need to be replicated with high statisticak power and deeply analyzed before we believe them.
+Twyman wrote that "Any figure that looks interesting or different is usually wrong." Most amazing results turn out to be false when reviewed carefully, so they need to be replicated with high statistical power and deeply analyzed before we believe them.
 
 ### Innovation vs. Incrementalism
 
@@ -56,7 +56,7 @@ The question of "fail fast" vs. "persevere" always comes up. There is no magic b
 
 In the online world, agility and continuous availability of users makes MVT's less appealing.
 
-In our experience, interactions are relatively rare and more often represent bugs than true statistical interactions. Hen we do suspect interactions, or when they are detected, we run small MVT's, but these are relatively rare.
+In our experience, interactions are relatively rare and more often represent bugs than true statistical interactions. When we do suspect interactions, or when they are detected, we run small MVT's, but these are relatively rare.
 
 ## Engineering Lessons
 
@@ -72,8 +72,17 @@ In our experience, interactions are relatively rare and more often represent bug
 
 ### Impact of the Experimentation System
 
-Experimentation System performance impact%
+Experimentation System performance impact:
  * experiment assignment adds a small delay (less than a millisecond).
  * increasing the number of experiments assigned to each request results in increasing cache fragmentation, lowering cache hit rates and increasing latency.
  
 We holdout 10% of our total users from any experimentation. The problem of understanding the impact of Experimentation System itself becomes another A/B test.
+
+### Alerts and Aborting Bad Experiments
+
+Any change has the potential to degrade the user experience, and even a small degradation can increase user abandonment or cost millions of dollars if not caught quickly. So we need to automatically detect and alert when degradations occur and to automatically revert any changes that cause severe degradations.
+
+The naive approach to alerting on any statistically significant negative metric changes will lead to an ucacceptable number of false alerts and thus make the entire alerting system useless. To avoid this we employ multiple techniques:
+ * Before raising the alert, we require that a detected delta is not only statistically significant but also large enough in absolute magnitude to have meaningful user or business impact.
+ * Corrections for multiple testing.
+ * Different magnitudes of changes for different metrics are categorized in specific severity levels. The most severe changes result in automatic shutdown of an experiment but less severe changes will result im emails sent to the owner of the experiment and a central experimentation team.
