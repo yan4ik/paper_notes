@@ -55,9 +55,29 @@ class DotProductScoringModel(nn.Module):
 
 ### Multiple Negatives Loss
 
-```Python
+```python
 def multiple_negatives_loss(correct_scores, incorrect_scores):
     denominator = torch.log(torch.exp(correct_scores) + torch.exp(incorrect_scores).sum(dim=1))
     loss = correct_scores - denominator
-    return (-loss.sum(dim=0) / batch_size)[0]
+    return (-loss.sum(dim=0) / batch_size)[0]    
+```
+
+```python
+for batch in proc_batch_gen:
+
+    my_batch_q, my_batch_a = batch
+    
+    pad_batch_q = Variable(torch.LongTensor(pad_batch(my_batch_q))).cuda(USE_GPU_NUM)
+    pad_batch_a = Variable(torch.LongTensor(pad_batch(my_batch_a))).cuda(USE_GPU_NUM)    
+
+    correct_scores = yanet(pad_batch_q, pad_batch_a)
+
+
+    neg_batch_q = Variable(torch.LongTensor(pad_batch([my_batch_q[j // curr_batch_len] for j in range(curr_batch_len ** 2) if j % curr_batch_len != 0]))).cuda(USE_GPU_NUM)
+    neg_batch_a = Variable(torch.LongTensor(pad_batch([my_batch_a[j % curr_batch_len] for j in range(curr_batch_len ** 2) if (j % curr_batch_len) != (j // curr_batch_len)]))).cuda(USE_GPU_NUM)
+
+    incorrect_scores = yanet(neg_batch_q, neg_batch_a).resize(curr_batch_len, curr_batch_len - 1)
+    
+    
+    loss = multiple_negatives_loss(correct_scores, incorrect_scores)
 ```
