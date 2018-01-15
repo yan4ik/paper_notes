@@ -1,0 +1,20 @@
+# Cycical Learning Rates for Training
+
+Source: [arxiv](https://arxiv.org/abs/1506.01186)
+
+This paper describes a new method for setting the learning rate, named `cyclical learning rates`.
+
+Instead of monotonically decreasing the learning rate, this method lets the learning rate cyclically vary between reasonable boundary values.
+
+Training with cyclical learning rates instead of fixed values achieves improved classification accuracy without a need to tune and often in fewer iterations.
+
+## Optimal Learning Rates
+
+### Cyclical Learning Rates
+
+The essence of this learning rate policy comes from the observation that increasing the learning rate might have a short term negative effect and yet achieve a longer term beneficial effect.
+
+One sets minimum and maximum boundaries and the learning rate cyclically varies between these bounds.
+
+Experiments with numerous functional forms, such as a triangular window (linear), a Welch window (parabolic) and a Hann window (sinusoidal) all produced equivalent results. This led to adopting a triangular window (linearly increasing then linearly decreasing).
+
