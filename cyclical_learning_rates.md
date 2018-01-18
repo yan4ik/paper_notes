@@ -16,5 +16,5 @@ The essence of this learning rate policy comes from the observation that increas
 
 One sets minimum and maximum boundaries and the learning rate cyclically varies between these bounds.
 
-Experiments with numerous functional forms, such as a triangular window (linear), a Welch window (parabolic) and a Hann window (sinusoidal) all produced equivalent results. This led to adopting a triangular window (linearly increasing then linearly decreasing).
+### Good Value for the Cycle Length
 
