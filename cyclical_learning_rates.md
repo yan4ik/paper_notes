@@ -24,3 +24,10 @@ One sets minimum and maximum boundaries and the learning rate cyclically varies 
 
 ### Good Value for the Cycle Length
 
+Experiments show that it often is good to set stepsize equal to 2 − 10 times the number of iterations in an epoch.
+
+Also, it is best to stop training at the end of a cycle, which is when the learning rate is at the minimum value and the accuracy peaks.
+
+### Reasonable Minimum and Maximum Boundary Values
+
+`LR range test` - run your model for several epochs while letting the learning rate increase linearly between low and high LR values.
