@@ -2,6 +2,10 @@
 
 Source: [arxiv](https://arxiv.org/abs/1506.01186)
 
+[//]: # (Image References)
+
+[image1]: ./img/cyclical_lr.png
+
 This paper describes a new method for setting the learning rate, named `cyclical learning rates`.
 
 Instead of monotonically decreasing the learning rate, this method lets the learning rate cyclically vary between reasonable boundary values.
@@ -15,6 +19,8 @@ Training with cyclical learning rates instead of fixed values achieves improved 
 The essence of this learning rate policy comes from the observation that increasing the learning rate might have a short term negative effect and yet achieve a longer term beneficial effect.
 
 One sets minimum and maximum boundaries and the learning rate cyclically varies between these bounds.
+
+![alt text][image1]
 
 ### Good Value for the Cycle Length
 
