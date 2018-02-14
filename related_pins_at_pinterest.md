@@ -21,3 +21,35 @@ The Related Pins system comprises three major components. The components were in
 **Memboost.** A portion of our system memorizes past engagement on specific query and result pairs.
 
 **Ranking.** A machine-learned ranking model is applied to the pins, ordering them to maximize our target engagement metric.
+
+## Evolution of Candidates
+
+### Board co-occurrence
+
+#### Heuristic candidates.
+
+The original Related Pins were computed in an offline Hadoop Map/Reduce job: we mapped over the set of boards and output pairs of pins that occured on the same board.
+
+There are too many pairs of possible pins, so `pairs are randomly sampled` to produce approximately the same number of candidates per query pin.
+
+We further added a `heuristic relevance score`, based on rough text and category matching. The score was hand-tuned by inspecting example results.
+
+#### Online Random Walk
+
+Shortcomings of previous approches:
+ * heuristic score did not attempt to maximize board co-occurence.
+ * rare pins did not have manu candidates.
+ 
+To address these limitations we moved to generating candidates at serving time through an online traversal of the board-to-pin graph.
+
+### Session Co-occurence
+
+Shortcomings of previous approches:
+ * boards are often too broad, so any given pair of pins on a board may only be tangentially related.
+ * boards may also be too narrow: for example, a whiskey and a cocktail made with that whiskey might be pinned in close succesion to different boards.
+ 
+Both these shortcomings can be addressed by incorporating the temporal dimension of user behaviour: pins saved during the same session are typically related in some way.
+
+We built Pin2Vec to harness these session co-occurence signals. Pin2Vec is a learned embedding of the N most popular in a d-dimensional space, with the goal of minimizing the distance between pins which are saved in the same session:
+ * each training example is a pair of pins that are saved by the same user within a certain time window.
+ 
