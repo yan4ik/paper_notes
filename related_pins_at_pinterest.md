@@ -3,6 +3,7 @@
 [//]: # (Image References)
 
 [image1]: ./img/related_pins_sys.png
+[image2]: ./img/related_pins_pin2vec
 
 Source: [Pinterest Labs](https://labs.pinterest.com/user/themes/pinlabs/assets/paper/p2p-www17.pdf)
 
@@ -38,7 +39,7 @@ We further added a `heuristic relevance score`, based on rough text and category
 
 Shortcomings of previous approches:
  * heuristic score did not attempt to maximize board co-occurence.
- * rare pins did not have manu candidates.
+ * rare pins did not have many candidates.
  
 To address these limitations we moved to generating candidates at serving time through an online traversal of the board-to-pin graph.
 
@@ -52,4 +53,10 @@ Both these shortcomings can be addressed by incorporating the temporal dimension
 
 We built Pin2Vec to harness these session co-occurence signals. Pin2Vec is a learned embedding of the N most popular in a d-dimensional space, with the goal of minimizing the distance between pins which are saved in the same session:
  * each training example is a pair of pins that are saved by the same user within a certain time window.
+ * given one of the pins as input, an embedding matrix maps pin IDs to vectors, and a softmax layer is used to map the embeddings back into a predicted output pin ID.
+ * the other pin in the pair is given as the expected output, and we train the embedding by minimizing the cross-entropy loss.
+ * negative examples are sampled to make the optimization tractable.
+
+At serving time, when the user queries one of the N pins, we generate candidate pins by looking up its nearest neighbours in the embedding space.
  
+![alt text][image2]
