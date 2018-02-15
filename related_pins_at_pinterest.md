@@ -3,7 +3,7 @@
 [//]: # (Image References)
 
 [image1]: ./img/related_pins_sys.png
-[image2]: ./img/related_pins_pin2vec
+[image2]: ./img/related_pins_pin2vec.png
 
 Source: [Pinterest Labs](https://labs.pinterest.com/user/themes/pinlabs/assets/paper/p2p-www17.pdf)
 
