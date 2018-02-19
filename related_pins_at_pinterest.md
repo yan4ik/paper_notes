@@ -60,3 +60,15 @@ We built Pin2Vec to harness these session co-occurence signals. Pin2Vec is a lea
 At serving time, when the user queries one of the N pins, we generate candidate pins by looking up its nearest neighbours in the embedding space.
  
 ![alt text][image2]
+
+### Supplemental Candidates
+
+**Search-based candidates.** We generate candidates by leveraging Pinterest's text-based search, using the query pin's annotations (words from the web link or description) as query tokens. These search-based candidates tend to be less specifically relevant than those generated from board co-occurrence, but offer a nice trade-ff from an exploration perspective.
+
+**Visually similar candidates.** 
+ * If the query image is a near-duplicate, then we add the Related Pins recommendations for the duplicate image to the result.
+ * If no near-duplicate is identified, then we use the Visual Search backend to return visually similar images, based on a nearest-neighbour lookup of the query's visual enbedding vector.
+
+****
+
+**Memboost.** A portion of our system memorizes past engagement on specific query and result pairs.
