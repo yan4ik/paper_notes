@@ -86,5 +86,4 @@ We initially wanted to simply incorporate the historical click-through rate of e
 To account for this, we instead chose to compute `clicks over expected clicks`. Let:
  * clicks(q, r) be the total number of clicks received by result pin r on query pin q.
  * i<sub>p, k</sub>(q, r) be the number of impressions result pin r on query pin q received on platform p and rank k.
- * each impression contributes a certain  fractional number of `expected clicks`, based on the global prior clickrate<sub>p, k</sub> for that rank and platform.
- * the number of expected clicks for each result is Eclicks(q, r) = (sum over all p and k) i<sub>p, k</sub>(q, r) * clickrate<sub>p, k</sub>.
+ * each impression contributes a certain  fractional number of `expected clicks`, based on the global prior clickrate<sub>p, k</sub> for that rank and platform: Eclicks(q, r) = (sum over all p and k) i<sub>p, k</sub>(q, r) * clickrate<sub>p, k</sub>.
