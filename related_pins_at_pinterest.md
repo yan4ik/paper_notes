@@ -5,7 +5,7 @@
 [image1]: ./img/related_pins_sys.png
 [image2]: ./img/related_pins_pin2vec.png
 [image3]: ./img/related_pins_actions.png
-[image3]: ./img/related_pins_memboost_score.png
+[image4]: ./img/related_pins_memboost_score.png
 
 Source: [Pinterest Labs](https://labs.pinterest.com/user/themes/pinlabs/assets/paper/p2p-www17.pdf)
 
