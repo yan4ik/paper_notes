@@ -4,6 +4,8 @@
 
 [image1]: ./img/related_pins_sys.png
 [image2]: ./img/related_pins_pin2vec.png
+[image3]: ./img/related_pins_actions.png
+[image3]: ./img/related_pins_memboost_score.png
 
 Source: [Pinterest Labs](https://labs.pinterest.com/user/themes/pinlabs/assets/paper/p2p-www17.pdf)
 
@@ -87,3 +89,14 @@ To account for this, we instead chose to compute `clicks over expected clicks`. 
  * clicks(q, r) be the total number of clicks received by result pin r on query pin q.
  * i<sub>p, k</sub>(q, r) be the number of impressions result pin r on query pin q received on platform p and rank k.
  * each impression contributes a certain  fractional number of `expected clicks`, based on the global prior clickrate<sub>p, k</sub> for that rank and platform: Eclicks(q, r) = (sum over all p and k) i<sub>p, k</sub>(q, r) * clickrate<sub>p, k</sub>.
+
+We extended these definitions to other engagement actions:
+
+![alt text][image3]
+
+The overall `Memboost score` is:
+
+![alt text][image4]
+
+ * to get a zero-centered score where positive and negative values would indicate that the result was engaged with more and less than expected, respectively, we use the logarithm.
+ * we apply additive smoothing to handle items with low action / impression counts.
