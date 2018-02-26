@@ -100,3 +100,15 @@ The overall `Memboost score` is:
 
  * to get a zero-centered score where positive and negative values would indicate that the result was engaged with more and less than expected, respectively, we use the logarithm.
  * we apply additive smoothing to handle items with low action / impression counts.
+
+The Memboost scores are added with a coefficient to adjust the existing scores of pins.
+
+Until recently, the Memboost weights were hand-tuned. Now we moved to `Memboost as a feature`, where the intermediate Memboost values (clicks, Eclicks, ...) are fed as features into the machine-learned ranker.
+
+### Memboost Insertion
+
+Memboost insertion re-inserts the top n result with the highest aggregate Memboost score if they are not already in the incoming result set.
+
+### Discussion
+
+Memboost as a whole introduces significant system complexity by adding feedback loops in the system.
