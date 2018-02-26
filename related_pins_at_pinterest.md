@@ -112,3 +112,14 @@ Memboost insertion re-inserts the top n result with the highest aggregate Memboo
 ### Discussion
 
 Memboost as a whole introduces significant system complexity by adding feedback loops in the system.
+
+## Evolution of Ranking
+
+In our application, the ranker re-orders candidate pins in the context of a particular query Q, which comprises the query pin, the viewing user, and user context.
+
+**Version 1: Memboost training data, relevance pair labels, pairwise loss, and linear RankSVM model.**
+
+* **Supervision signal:** Memboost scores.
+* **Loss function:** pairwise ranking loss.
+* **Training data:** we explicitly sampled pairs of pins (r<sub>1</sub>, r<sub>n</sub>), (r<sub>n</sub>, r<sub>rand</sub>) for each query, where r<sub>1</sub>, r<sub>n</sub> are the results with highest and lowest Memboost scores, respectively, for a given query. r<sub>rand</sub> is a randomly generated popular pin from Pinterest.
+* **Model:** linear RankSVM.
