@@ -39,7 +39,7 @@ We further added a `heuristic relevance score`, based on rough text and category
 
 #### Online Random Walk
 
-Shortcomings of previous approches:
+Shortcomings of previous approaches:
  * heuristic score did not attempt to maximize board co-occurence.
  * rare pins did not have many candidates.
  
@@ -47,7 +47,7 @@ To address these limitations we moved to generating candidates at serving time t
 
 ### Session Co-occurence
 
-Shortcomings of previous approches:
+Shortcomings of previous approaches:
  * boards are often too broad, so any given pair of pins on a board may only be tangentially related.
  * boards may also be too narrow: for example, a whiskey and a cocktail made with that whiskey might be pinned in close succesion to different boards.
  
@@ -123,3 +123,26 @@ In our application, the ranker re-orders candidate pins in the context of a part
 * **Loss function:** pairwise ranking loss.
 * **Training data:** we explicitly sampled pairs of pins (r<sub>1</sub>, r<sub>n</sub>), (r<sub>n</sub>, r<sub>rand</sub>) for each query, where r<sub>1</sub>, r<sub>n</sub> are the results with highest and lowest Memboost scores, respectively, for a given query. r<sub>rand</sub> is a randomly generated popular pin from Pinterest.
 * **Model:** linear RankSVM.
+
+**Version 2: Moved to individual Related Pins sessions.**
+
+Shortcomings of previous approaches:
+ * using Memboost data inherently `precludes personalization` (because it is aggregated over many users).
+ * only popular content had enough interaction for reliable Memboost data.
+ 
+These limitations motivated the folowing changes:
+ * **Supervision signal:** user interactions with Related Pins (save > long_click > click > closeup > impression_only).
+ * **Training data:** we trim the logged set of pins, taking each engaged pin as well as two pins immediately preceding it in rank order (under the assumption that the user probably saw those pins).
+ 
+**Version 3: Moved to RankNet GBDT Model.**
+
+Shortcomings of previous approaches:
+ * linear model can not capture complex dependencies.
+ 
+To avoid these downsides, we moved to gradient-boosted decision trees:
+ * **Model:** GBDT RankNet.
+ 
+**Version 4: Moved to pointwise classification loss, binary labels, and logistic GBDN model.**
+
+ * **Supervision signal:** since our primary target metric in online experiments is the prospensity of users to save result pins, using training examples which also include closeups and clicks seemed counterproductive since these actions may not reflect save prospensity. We found that giving examples simple binary labels ("saved" and "not saved") and reweighting positive examples to combat class imbalance proved effective at increasing save prospensity.
+ * **Loss function:** pointwise logistic loss.
