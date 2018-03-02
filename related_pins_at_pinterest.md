@@ -157,3 +157,9 @@ To avoid these downsides, we moved to gradient-boosted decision trees:
 To avoid degrading any particular user's experience too much, each user is served unranked pins on only a small random subset of queries.
 
 ![alt text][image5]
+
+### Success Metrics
+
+We found that PR AUC metrics (calculated offline) are extremely predictive of closeups and clickthroughs in A/B experiments, but we had difficulty predicting the save behaviour using offline evaluation.
+
+For now, we use offline metrics as a sanity check and rough estimation of potential impact.
