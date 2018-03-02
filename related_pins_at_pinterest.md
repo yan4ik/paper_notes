@@ -6,6 +6,7 @@
 [image2]: ./img/related_pins_pin2vec.png
 [image3]: ./img/related_pins_actions.png
 [image4]: ./img/related_pins_memboost_score.png
+[image5]: ./img/related_pins_feedback.png
 
 Source: [Pinterest Labs](https://labs.pinterest.com/user/themes/pinlabs/assets/paper/p2p-www17.pdf)
 
@@ -146,3 +147,13 @@ To avoid these downsides, we moved to gradient-boosted decision trees:
 
  * **Supervision signal:** since our primary target metric in online experiments is the prospensity of users to save result pins, using training examples which also include closeups and clicks seemed counterproductive since these actions may not reflect save prospensity. We found that giving examples simple binary labels ("saved" and "not saved") and reweighting positive examples to combat class imbalance proved effective at increasing save prospensity.
  * **Loss function:** pointwise logistic loss.
+
+ ### Previous-Model Bias
+
+**Problem:** Because engagement logs are used for training, we introduced a `direct feedback loop`: the model that is currently deployed dramatically impacts the training examples produced for future models.
+
+To alleviate this "previous-model" bias in the training data, we allocate a small percentage of traffic for "unbiased data collection": for these requests, we show a random sample from all our candidate sources, randomly ordered without ranking.
+
+To avoid degrading any particular user's experience too much, each user is served unranked pins on only a small random subset of queries.
+
+![alt text][image5]
