@@ -22,3 +22,5 @@ The two outputs of the model are mapped to a learned probability that U<sub>i</s
 ![alt text][image1]
 
 Parameter &sigma; determines the shape of the sigmoid.
+
+We then apply the cross entropy cost function, which penalizes the deviation of the model output probabilities from the desired probabilities.
