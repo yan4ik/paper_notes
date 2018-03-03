@@ -14,4 +14,4 @@
 
 ### Neural Networks
 
- * [Deep Crossing](https://github.com/yan4ik/paper_notes/blob/master/deep_crossing.md)
+ * [Deep Crossing](https://github.com/yan4ik/paper_notes/blob/master/models/deep_crossing.md)
