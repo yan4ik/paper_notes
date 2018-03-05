@@ -2,11 +2,11 @@
 
 [//]: # (Image References)
 
-[image1]: ./img/ebay_vis_srch_arch.png
-[image2]: ./img/ebay_vis_srch_fc.png
-[image3]: ./img/ebay_vis_srch_sore.png
-[image4]: ./img/ebay_vis_srch_index.png
-[image5]: ./img/ebay_vis_srch_serv.png
+[image1]: ../img/ebay_vis_srch_arch.png
+[image2]: ../img/ebay_vis_srch_fc.png
+[image3]: ../img/ebay_vis_srch_sore.png
+[image4]: ../img/ebay_vis_srch_index.png
+[image5]: ../img/ebay_vis_srch_serv.png
 
 Source: [arxiv](https://arxiv.org/abs/1706.03154)
 

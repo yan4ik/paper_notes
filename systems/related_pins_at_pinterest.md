@@ -2,11 +2,11 @@
 
 [//]: # (Image References)
 
-[image1]: ./img/related_pins_sys.png
-[image2]: ./img/related_pins_pin2vec.png
-[image3]: ./img/related_pins_actions.png
-[image4]: ./img/related_pins_memboost_score.png
-[image5]: ./img/related_pins_feedback.png
+[image1]: ../img/related_pins_sys.png
+[image2]: ../img/related_pins_pin2vec.png
+[image3]: ../img/related_pins_actions.png
+[image4]: ../img/related_pins_memboost_score.png
+[image5]: ../img/related_pins_feedback.png
 
 Source: [Pinterest Labs](https://labs.pinterest.com/user/themes/pinlabs/assets/paper/p2p-www17.pdf)
 
