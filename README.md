@@ -2,6 +2,10 @@
 
 ## Deployed Systems
 
+### CTR Prediction
+
+ * [Deep Interest Network for Click-Through Rate Prediction](https://github.com/yan4ik/paper_notes/blob/master/systems/deep_interest_network.md)
+
 ### Recommendations
 
  * [Related Pins at Pinterest](https://github.com/yan4ik/paper_notes/blob/master/systems/related_pins_at_pinterest.md)
