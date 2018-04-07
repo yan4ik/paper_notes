@@ -8,7 +8,7 @@ Source: [arxiv](https://arxiv.org/abs/1706.06978)
 [image2]: ../img/deep_interest_gauc.png
 [image3]: ../img/deep_interest_architecture.png
 [image4]: ../img/deep_interest_attention.png
-[image5]: ../img/deep_interest_.png
+[image5]: ../img/deep_interest_dice.png
 
 In this paper, we introduce a new proposed model for CTR prediction, named `Deep Interest Network`, which is developed and deployed in the display advertising system in Alibaba.
 
