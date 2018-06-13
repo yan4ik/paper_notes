@@ -2,6 +2,7 @@
 
 [//]: # (Image References)
 [image1]: ../img/billionscale_alibaba_ege.png
+[image2]: ../img/billionscale_alibaba_eege.png
 
 Source: [arxiv](https://arxiv.org/abs/1803.02349)
 
@@ -34,3 +35,15 @@ We concatenate n + 1 embedding vectors (one vector with item embedding and n vec
 ![alt text][image1]
 
 In this way, we incorporate side information in such a way that items with similar side information will be closer in the mebedding space.
+
+### Enchanced Graph Embedding with Side Information
+
+**Problem:** Different kinds of side information contribute equally to the final embedding, which does not reflect the reality.
+
+**Solution:** We propose a `weighted average layer` to aggregate the embeddings.
+
+![alt text][image2]
+
+Exponentiation is used to ensure that the contribution of each side information is greater than 0.
+
+Th denominator is used to normalize the weights related to the embedding of different side information.
