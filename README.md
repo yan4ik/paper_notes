@@ -22,3 +22,5 @@
  * [Deep Crossing](https://github.com/yan4ik/paper_notes/blob/master/models/deep_crossing.md)
  
  * [Deep Interest Network for Click-Through Rate Prediction](https://github.com/yan4ik/paper_notes/blob/master/systems/deep_interest_network.md)
+
+ * [SSD: Single Shot Multibox Detector](https://github.com/yan4ik/paper_notes/blob/master/models/ssd.md)
