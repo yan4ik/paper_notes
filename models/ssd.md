@@ -6,6 +6,7 @@ Source: [arxiv](http://arxiv.org/abs/1512.02325)
 
 [image1]: ../img/ssd_ssd.png
 [image2]: ../img/ssd_prior.png
+[image3]: ../img/ssd_loc_loss.png
 
 We present a method for detecting objects in images using a single deep neural network.
 
@@ -29,6 +30,36 @@ We then add auxiliary structure to the network to produce detections.
 
 **Convolutional predictors for detection.** Each added feature layer (or optionally an existing feature layer from the base network) can produce a fixed set of detection predictions using a set of convolutional filters.
 
+```python
+nn.Conv2d(source_input_channels,
+          bbox_count * num_classes, 
+          kernel_size=3, 
+          padding=1)]
+
+nn.Conv2d(source_input_channels,
+          bbox_count * num_classes, 
+          kernel_size=3, 
+          padding=1)]
+```
+
 **Default boxes** We associate a set of default bounding boxes with each feature map cell. At each feature map cell, we predict the offsets relative to the default box shapes in the cell, as well as the per-class scores that indicate the presence of a class instance in each of those boxes.
 
 ![alt text][image2]
+
+Essentially the network produces predictions for each prior box.
+
+## Training
+
+During training we need to determine which default boxes correspond to a ground truth detection:
+ * we match eaxg ground truth to the default box with the best jaccard overlap.
+ * we then match default boxes to any ground truth with jaccard overlap higher that a threshold.
+ 
+### Training objective
+
+The SSD training objective is a weighted sum of the localization loss (loc) and the confidnce loss (conf).
+
+The confidence loss is the standart softmax loss.
+
+The localization loss is a Smooth L1 loss between the predicted box (l) and the ground truth box (g) parameters:
+
+![alt text][image3]
