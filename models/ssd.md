@@ -11,7 +11,7 @@ We present a method for detecting objects in images using a single deep neural n
 
 Our approach discretizes the output space of bounding boxes into a set of default boxes over different aspect ratios and scales per feature map location.
 
-At prediction time, the network generates scores for the presence of each object category in each default box and produces adjustments to the box to better match the pbject shape.
+At prediction time, the network generates scores for the presence of each object category in each default box and produces adjustments to the box to better match the object shape.
 
 Additionally, the network combines predictions from multiple feature maps with different resolutions to naturally handle objects of various sizes.
 
