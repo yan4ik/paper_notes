@@ -6,7 +6,8 @@ Source: [arxiv](http://arxiv.org/abs/1512.02325)
 
 [image1]: ../img/ssd_ssd.png
 [image2]: ../img/ssd_prior.png
-[image3]: ../img/ssd_loc_loss.png
+[image3]: ../img/ssd_grid.png
+[image4]: ../img/ssd_loc_loss.png
 
 We present a method for detecting objects in images using a single deep neural network.
 
@@ -48,6 +49,10 @@ nn.Conv2d(source_input_channels,
 
 Essentially the network produces predictions for each prior box.
 
+Helpful picture to understand what's going on:
+
+![alt text][image3]
+
 ## Training
 
 During training we need to determine which default boxes correspond to a ground truth detection:
@@ -62,4 +67,4 @@ The confidence loss is the standart softmax loss.
 
 The localization loss is a Smooth L1 loss between the predicted box (l) and the ground truth box (g) parameters:
 
-![alt text][image3]
+![alt text][image4]
