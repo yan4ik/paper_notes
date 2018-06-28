@@ -5,9 +5,9 @@ Source: [arxiv](http://arxiv.org/abs/1801.07698)
 [//]: # (Image References)
 
 [image1]: ../img/arcface_arcface.png
-[image1]: ../img/arcface_geom.png
-[image1]: ../img/arcface_logit.png
-[image1]: ../img/arcface_analysis.png
+[image2]: ../img/arcface_geom.png
+[image3]: ../img/arcface_logit.png
+[image4]: ../img/arcface_analysis.png
 
 To enhance the discriminative power of the Softmax loss we propose a novel supervisor signal, `additive angular margin` (ArcFace), which has a better geometrical interpretation than supervision signals proposed so far.
 
@@ -17,9 +17,9 @@ To enhance the discriminative power of the Softmax loss we propose a novel super
 
 Difference from traditional Softmax:
  * we normalize the weights of the last fully-connected layer (by row).
- * we normalize embedding features from convolutional network (this can be dome with batchnorm).
+ * we normalize embedding features from convolutional network (this can be done with batchnorm).
  * after these two steps the dot products after the fc layer are basically cosines.
- * for the correct class we calculate cos(theta + m) isntead of cos(theta).
+ * for the correct class we calculate cos(theta + m) instead of cos(theta).
  
 What this means in English: correct scores are penalized (in a smart way).
 
