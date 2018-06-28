@@ -24,3 +24,5 @@
  * [Deep Interest Network for Click-Through Rate Prediction](https://github.com/yan4ik/paper_notes/blob/master/systems/deep_interest_network.md)
 
  * [SSD: Single Shot Multibox Detector](https://github.com/yan4ik/paper_notes/blob/master/models/ssd.md)
+ 
+ * [ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://github.com/yan4ik/paper_notes/blob/master/models/arcface.md)
