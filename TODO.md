@@ -1,3 +1,29 @@
+KDD 2018
+
+Real-time Personalization using Embeddings for Search Ranking at Airbnb
+Scalable Query N-Gram Embedding for Improving Matching and Relevance in Sponsored Search
+Reinforcement Learning to Rank in E-Commerce Search Engine: Formalization, Analysis, and Application
+Deep Interest Network for Click-Through Rate Prediction
+MIX: Multi-Channel Information Crossing for Text Matching
+
+Accelerating E-Commerce Search Engine Ranking by Contextual Factor Selection
+
+SIGIR 2018
+
+Entire Space Multi-Task Model: An Effective Approach for Estimating Post-Click Conversion Rate
+
+KDD 2017
+
+* A Practical Exploration System for Search Advertising
+* Cascade Ranking for Operational E-commerce Search
+
+
+
+
+
+
+
+
 * Embedding-based News Recommendation for Millions of Users
 * BDT: Boosting Decision Tables for High Accuracy and Scoring Efficiency
 * Deep Embedding Forest: Forest-based Serving with Deep Embedding Features
