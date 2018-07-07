@@ -5,6 +5,8 @@ Scalable Query N-Gram Embedding for Improving Matching and Relevance in Sponsore
 Reinforcement Learning to Rank in E-Commerce Search Engine: Formalization, Analysis, and Application
 Deep Interest Network for Click-Through Rate Prediction
 MIX: Multi-Channel Information Crossing for Text Matching
+Optimizing Sponsored Search Ranking Strategy by Deep Reinforcement Learning
+Deep Reinforcement Learning for Sponsored Search Real-time Bidding
 
 Accelerating E-Commerce Search Engine Ranking by Contextual Factor Selection
 
