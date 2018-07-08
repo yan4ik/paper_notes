@@ -18,7 +18,7 @@ KDD 2017
 
 * A Practical Exploration System for Search Advertising
 * Cascade Ranking for Operational E-commerce Search
-
+* Customer Lifetime Value Prediction Using Embeddings
 
 
 
