@@ -33,7 +33,7 @@ We then add auxiliary structure to the network to produce detections.
 
 ```python
 nn.Conv2d(source_input_channels,
-          bbox_count * num_classes, 
+          bbox_count * 4, 
           kernel_size=3, 
           padding=1)]
 
