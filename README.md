@@ -27,5 +27,4 @@
  
  * [ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://github.com/yan4ik/paper_notes/blob/master/models/arcface.md)
  
- * [Unsupervised Domain Adaptation by Backpropagation]
- (https://github.com/yan4ik/paper_notes/blob/master/models/da_backrop.md)
+ * [Unsupervised Domain Adaptation by Backpropagation](https://github.com/yan4ik/paper_notes/blob/master/models/da_backrop.md)
