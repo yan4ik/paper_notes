@@ -15,7 +15,7 @@ The approach promotes the emergence of “deep” features that are:
 
 ![alt text][image2]
 
-**The idea:**: at training time, we seek the parameters of the feature mapping that maximize the loss of
+**The idea:** at training time, we seek the parameters of the feature mapping that maximize the loss of
 the domain classifier, while simultaneously seeking the parameters of the domain classifier that minimize the loss of the domain classifier. In addition, we seek to minimize the loss of the label predictor.
 
 As a result:
