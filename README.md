@@ -17,6 +17,10 @@
  
 ## Models
 
+### Multi-task
+
+ * [Multi-gate Mixture-of-Experts](https://github.com/yan4ik/paper_notes/blob/master/models/multitask/mmoe.md)
+
 ### Neural Networks
 
  * [Deep Crossing](https://github.com/yan4ik/paper_notes/blob/master/models/deep_crossing.md)
