@@ -114,3 +114,13 @@ class MultiHeadAttention(torch.nn.Module):
         
         return self.out(concat)
 ```
+
+### Position-wise Feed-Forward Networks
+
+We have our sequence of embeddings.
+
+**What we want:** we just want to add some nonlinearities.
+
+**How we do it:** pipe every embedding through a feedforward network.
+
+This network is the same for all elements in the sequence! This way we don't care about the sequence length.
