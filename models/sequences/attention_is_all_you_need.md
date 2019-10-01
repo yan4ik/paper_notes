@@ -6,7 +6,9 @@ We propose a new simple network architecture, the `Transformer`, based solely on
 
 ## Building Blocks
 
-Great source: [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
+Great source to get the big idea: [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
+
+Great source to understand implementation: [How to Code the Transformer in PyTorch](https://towardsdatascience.com/how-to-code-the-transformer-in-pytorch-24db27c8f9ec)
 
 ### Scaled Dot-Product Attention
 
