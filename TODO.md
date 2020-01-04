@@ -1,3 +1,5 @@
+https://arxiv.org/pdf/1912.11370v1.pdf
+
 KDD 2018
 
 Real-time Personalization using Embeddings for Search Ranking at Airbnb
